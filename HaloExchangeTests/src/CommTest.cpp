@@ -576,8 +576,8 @@ void GatherTimings()
     std::cout << std::endl << std::endl;
 
     std::cout << "~~~~~~~~~~~~~~ Bandwidth ~~~~~~~~~~~~~~" << std::endl;
-    std::cout << "pack/unpack --> \t" << avg_data_transfered * nGCLHandlers * 2 / (avg_gcl_times[ comm_pack ] + avg_gcl_times[ comm_unpack ] ) << std::endl;
-    std::cout << "exchange --> \t" << avg_data_transfered * nGCLHandlers * 2 / (avg_gcl_times[ comm_send ]+avg_gcl_times[ comm_wait ]) << std::endl;
+    std::cout << "pack/unpack --> \t" << avg_data_transfered * nGCLHandlers * 2 / (avg_gcl_times[ comm_pack ] + avg_gcl_times[ comm_unpack ] ) / std::pow(1024,3) << "  GB/s " << std::endl;
+    std::cout << "exchange --> \t" << avg_data_transfered * nGCLHandlers * 2 / (avg_gcl_times[ comm_send ]+avg_gcl_times[ comm_wait ]) / std::pow(1024,3) << "  GB/s " << std::endl;
 
   }
 

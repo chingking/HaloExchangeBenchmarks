@@ -18,7 +18,7 @@ GCL_L2_INC   =  -I../../gcl/L2/include
 GCL_INC  =  $(GCL_L2_INC) -I../../gcl/L3/include -I../../gcl
 
 #libraries
-MPI_LIB  =  -L$(MPI_ROOT)/lib  -lmpich -lmpichcxx -lmpl 
+MPI_LIB  =  -L$(MPI_ROOT)/lib -lmpl -lmpichf90 -lmpich
 SLIB      =  -lgfortran -ldl -lm  -lbfd  -lz -liberty 
 
 CUDA_LIB = -L$(CUDALIB) -lcudart

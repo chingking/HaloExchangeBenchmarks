@@ -26,7 +26,9 @@ $ boost=<path-to-boost-headers>
 Enter the build directory and compile with
 
 $ export CXX=CC (or any g++ compiler for non Cray machines)
+
 $ cmake  ..  -DCMAKE_BUILD_TYPE=Release  -DBoost_INCLUDE_DIR=$boost  -DGCL_MPI=ON  -DGCL_GPU=ON (-DUSE_MPI_COMPILER=ON for non Cray machines)
+
 $ make
 
 As a result, the library gcl/lib/libgcl.a should exist.

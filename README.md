@@ -5,29 +5,28 @@ program for the measurement of the communication performance of GCL.
 1. Checkout
 ===========
 The sources can be found in the SVN repository:
-svn://scm.hpcforge.org/var/lib/gforge/chroot/scmrepos/svn/cclm-dev/trunk/INTERNODE
+https://github.com/cosunae/HaloExchangeBenchmarks.git
 
 The directory contains:
 * gcl: a snapshot of the Generic Communication Library
-* HaloExchange3D: the standalone program
-* other direcories, which are irrelevant for our purposes
+* HaloExchangeTests: the standalone program
 
 Before continuing, make sure the environment is prepared for the compilation.
 This includes switching to the desired programming environment (only
-PrgEnv-gnu has been tested on Cray machines), loading the cmake module and
+PrgEnv-gnu has been tested on Cray machines), loading the cmake module, boost and
 the CUDA toolkit.
 
 
 2. Building the GCL
 ===================
 Enter the gcl directory and create a "build" directory (the exact name matters).
-Locate the path to the boost headers.  On todi and daint you can use
-$ boost=/apps/todi/boost/1.51.0/gnu_471/include/
+Locate the path to the boost headers.
+$ boost=<path-to-boost-headers>
 
 Enter the build directory and compile with
 
-$ export CXX=CC
-$ cmake  ..  -DCMAKE_BUILD_TYPE=Release  -DBoost_INCLUDE_DIR=$boost  -DGCL_MPI=ON  -DGCL_GPU=ON
+$ export CXX=CC (or any g++ compiler for non Cray machines)
+$ cmake  ..  -DCMAKE_BUILD_TYPE=Release  -DBoost_INCLUDE_DIR=$boost  -DGCL_MPI=ON  -DGCL_GPU=ON (-DUSE_MPI_COMPILER=ON for non Cray machines)
 $ make
 
 As a result, the library gcl/lib/libgcl.a should exist.

@@ -12,6 +12,9 @@ ifndef F90
 endif
 
 
+GCL_FLAGS = -D_GCL_MPI_
+GCL_LIB  =   -L../../gcl/build/lib -lgcl
+
 LIB    := $(MPI_LIB) $(SLIB) $(GCL_LIB)
 CPPFLAGS   += $(GCL_INC) $(BOOST_INC) $(MPI_INC) $(GCL_FLAGS) -O3 -DNDEBUG -I../src
 #DEBUG = 1
@@ -29,7 +32,7 @@ ifdef GPU
 else
 ## comment in the next line for gcl manual packing (instead of mpi datatypes)
 #  CPPFLAGS += -DMANUAL_PACKING
-  CPPFLAGS += -fopenmp
+   CPPFLAGS += -fopenmp
    NVCC = $(CC)
    NVCPPFLAGS = $(CPPFLAGS) 
    CPPFLAGS += $(COPT) -O3 -DNDEBUG
@@ -54,7 +57,7 @@ cpu:
 all: $(ROOT)/CommTest.exe
 
 $(ROOT)/CommTest.exe: fortran_comm.o CommTest.o gcl_functions.o GnuplotLogger.o GCLGenericHandler.o GCLDynamicHandler.o CommStatsCollector.o
-	$(LD) ${LOPT} $^ -o $@ $(MPIF_LIB) $(MPICXX_LIB) $(LIB)
+	$(LD) ${LOPT} -O3 $^ -o $@ $(MPIF_LIB) $(MPICXX_LIB) $(LIB)
 
 
 .SUFFIXES: .o .f90 .cpp

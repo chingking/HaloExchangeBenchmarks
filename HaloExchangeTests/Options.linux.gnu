@@ -3,10 +3,6 @@ F90    =  gfortran
 CC       =   g++
 cc       =   gcc
 
-OMPFLAGS = -fopenmp
-
-CPPFLAGS = $(OMPFLAGS) -D_GCL_MPI_
-
 MPI_INC = -I$(MPI_ROOT)/include
 
 # optimization flags
@@ -23,7 +19,6 @@ GCL_L2_INC   =  -I../../gcl/L2/include -I/usr/lib64/mpi/gcc/openmpi/include/
 GCL_INC  =  $(GCL_L2_INC) -I../../gcl/L3/include -I../../gcl
 
 #libraries
-GCL_LIB  =   -L../../gcl_build/lib -lgcl
 MPI_LIB  =  -L$(MPI_ROOT)/lib64/ -lmpi_f90 -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -Wl,--export-dynamic -lnsl -lutil -lm -ldl -lmpi_cxx
 SLIB      =  -lgfortran -ldl -lm -L/apps/todi/binutils/2.22/gnu_462/lib  -lbfd  -lz -liberty
 

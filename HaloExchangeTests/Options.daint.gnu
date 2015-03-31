@@ -8,13 +8,10 @@ CC       =   CC
 cc       =   cc
 LD = CC
 
-GCL_FLAGS = -D_GCL_MPI_
-CPPFLAGS =  $(GCL_FLAGS)
-
 # optimization flags
 FOPT   =  -ffree-form -ffree-line-length-none -fno-backslash -fimplicit-none -O3 -fbounds-check
-COPT   =  -Wall -O3
-LOPT   =  -O3
+COPT   =  -Wall
+LOPT   =  
 
 # includes 
 BOOST_INC = -I/apps/todi/boost/1.51.0/gnu_471/include/

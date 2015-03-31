@@ -8,13 +8,10 @@ CC       =   CC
 cc       =   cc
 LD = CC
 
-GCL_FLAGS = -D_GCL_MPI_
-CPPFLAGS =  $(GCL_FLAGS)
-
 # optimization flags
 FOPT   =  -ffree-form -ffree-line-length-none -fno-backslash -fimplicit-none -O3 -fbounds-check
-COPT   =  -Wall -O3
-LOPT   =  -O3
+COPT   =  -Wall 
+LOPT   =  
 
 # includes 
 BOOST_INC = -I$(BOOST_ROOT)/include/
@@ -22,7 +19,7 @@ GCL_L2_INC   =  -I../../gcl/L2/include
 GCL_INC  =  $(GCL_L2_INC) -I../../gcl/L3/include -I../../gcl
 
 #libraries
-GCL_LIB  =   -L../../gcl_build/lib -L/opt/fftw/3.3.0.1/x86_64/lib -lgcl
+#GCL_LIB  =   -L../../gcl_build/lib -L/opt/fftw/3.3.0.1/x86_64/lib -lgcl
 MPI_LIB  =  -L/apps/todi/mpiP/3.3/gnu_462/lib -lmpiP
 SLIB      =   -ldl -lm -L/apps/todi/binutils/2.22/gnu_462/lib  -lbfd  -lz -liberty
 

@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH --job-name="halo_exchg" 
+#SBATCH --nodes=4
+#SBATCH --ntasks=4
+#SBATCH --time=00:05:00 
+#SBATCH --account=s83
+#SBATCH --partition=dev
+#SBATCH --gres=gpu:1
+#SBATCH --output=run_ntrac20_gclHndl10_version0_8OMP_todi_4x4_opt_b.out
+#SBATCH --error=run_ntrac20_gclHndl10_version0_8OMP_todi_4x4_opt_b.out
+#SBATCH --cpus-per-task=1
+
+#======START=============================== 
+echo "On which nodes it executes" 
+echo $SLURM_JOB_NODELIST
+#module load cudatoolkit
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/scratch/todi/cosuna/GCL/HaloExchangeTests 
+export OMP_NUM_THREADS=8
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/apps/todi/binutils/2.22/gnu_462/lib
+export MPICH_RDMA_ENABLED_CUDA=1
+aprun -n 4 -N 1 -d 1 ./CommTest.exe --nprocx 2 --nprocy 2  --random --enable-GCL --nGCLHandlers 10 --ntracer-perHandler 30
+#aprun -n 16 -N 1  ./CommTest.exe --nprocx 4 --nprocy 4  --random --enable-GCL --nGCLHandlers 10 --ntracer-perHandler 20
+#======END=================================

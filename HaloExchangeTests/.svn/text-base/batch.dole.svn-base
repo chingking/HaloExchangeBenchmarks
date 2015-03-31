@@ -1,0 +1,24 @@
+#PBS -N halo_exchg
+#PBS -S /bin/tcsh
+#PBS -M olifu
+#PBS -j oe                                     
+#PBS -l mppwidth=12
+#PBS -o run.out
+#PBS -q lmdev
+#PBS -l walltime=00:05:00
+
+# Initialization
+set verbose
+set echo
+
+# Go into case directory
+cd $PBS_O_WORKDIR/
+
+# set environmental parameters
+setenv MALLOC_MMAP_MAX_ 0
+setenv MALLOC_TRIM_THRESHOLD_ 536870912
+
+# Run LM in case directory
+aprun -n 12 ./halo.exe
+
+# done

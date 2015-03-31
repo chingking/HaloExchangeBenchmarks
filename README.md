@@ -21,9 +21,12 @@ the CUDA toolkit.
 ===================
 Enter the gcl directory and create a "build" directory (the exact name matters).
 Locate the path to the boost headers.
+
 $ boost=<path-to-boost-headers>
 
-Enter the build directory and compile with
+Create and enter a build directory and compile with cmake
+
+$ cd gcl; mkdir build; cd build
 
 $ export CXX=CC (or any g++ compiler for non Cray machines)
 

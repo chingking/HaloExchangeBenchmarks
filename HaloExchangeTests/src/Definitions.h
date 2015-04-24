@@ -6,6 +6,7 @@
     typedef GCL::gcl_cpu arch;
 #endif
 #define packing_version GCL::version_manual
+//#define packing_version GCL::version_datatype
 //#define generic_pattern
 #define dynamic_pattern
 #define _COLLECT_STATS_

@@ -11,11 +11,9 @@
  The program can be configured in to run fortran exchanges, GCL exchanges or both.
 
  GCL configuration:
-   * packing_version defines a mode for packing in GCL:
-       0   -> 1 mpi datatype per message block is chosen. OpenMP is enabled if env variable OMP_NUM_THREADS is exported
-       1   -> a single datatype describing the whole communicaion (several fields). No OpenMP in this mode
-   * Manual packing (ie. not using mpi datatypes) is enabled by commenting in the following line in the Makefile:
-      #  CPPFLAGS += -DMANUAL_PACKING
+   * packing_version (in Definitions.h) defines a mode for packing in GCL:
+        GCL::version_manual -> it uses custom kernels that pack all halos in a linear buffer used for communication.
+        GCL::version_datatype -> it uses mpi datatypes. 
 
    ntracer_perHandler sets the number of fields being exchanged per communication (gcl handler).
    nGCLHandlers sets the number of communications (each one exchanging ntracer_perHandler fields).

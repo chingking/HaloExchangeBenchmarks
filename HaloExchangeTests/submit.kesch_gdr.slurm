@@ -38,12 +38,11 @@ ulimit -a
 export OMP_NUM_THREADS=1
 export MV2_ENABLE_AFFINITY=0
 export MV2_USE_CUDA=1
-export MPICH_RDMA_ENABLED_CUDA=1
-export MPICH_G2G_PIPELINE=256
 export MALLOC_MMAP_MAX_=0
 export MALLOC_TRIM_THRESHOLD_=536870912
 export COSMO_NPROC_NODEVICE=0
 export CUDA_AUTO_BOOST=0
+export MV2_CUDA_IPC=1
 #export MPICH_ASYNC_PROGRESS=1
 
 export SLURM_NPROCS=8
@@ -53,9 +52,9 @@ echo "Time: `date +%s` s"
 export G2G=1
 
 #1D
-srun --ntasks=8 ./${EXECUTABLE} --nprocx 1 --nprocy 8 --ie 520 --je 350 --enable-GCL --ntracer-perHandler 3 --nGCLHandlers 30 --lperi_y --disable-validation-report --nbl_exchg 2
+srun -K -u --ntasks=8 -m block:block ./${EXECUTABLE} --nprocx 1 --nprocy 8 --ie 520 --je 350 --enable-GCL --ntracer-perHandler 3 --nGCLHandlers 30 --lperi_y --disable-validation-report --nbl_exchg 2
 #2D
-srun --ntasks=8  ./${EXECUTABLE} --nprocx 2 --nprocy 4 --ie 520 --je 350 --enable-GCL --ntracer-perHandler 3 --nGCLHandlers 30 --lperi_y --disable-validation-report --nbl_exchg 2
+srun -K -u --ntasks=8 -m block:block ./${EXECUTABLE} --nprocx 2 --nprocy 4 --ie 520 --je 350 --enable-GCL --ntracer-perHandler 3 --nGCLHandlers 30 --lperi_y --disable-validation-report --nbl_exchg 2
 
 echo '********** End Test ********* '
 

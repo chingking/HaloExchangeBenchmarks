@@ -45,11 +45,12 @@ export CUDA_AUTO_BOOST=0
 export MV2_CUDA_IPC=1
 #export MPICH_ASYNC_PROGRESS=1
 
+export MV2_USE_GPUDIRECT_RECEIVE_ALL=1
 export SLURM_NPROCS=8
 
 echo '********** Start Run ********* '
 echo "Time: `date +%s` s"
-export G2G=1
+export G2G=2
 
 #1D
 srun -K -u --ntasks=8 -m block:block ./${EXECUTABLE} --nprocx 1 --nprocy 8 --ie 520 --je 350 --enable-GCL --ntracer-perHandler 3 --nGCLHandlers 30 --lperi_y --disable-validation-report --nbl_exchg 2

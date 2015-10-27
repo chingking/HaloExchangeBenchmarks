@@ -853,9 +853,9 @@ void BindDevice() {
   cudaGetDeviceCount( &dev_count );
   // NUM_GPU_DEVICES allows to explicitly select the maximum
   // number of devices to use
-  if( ( str = getenv ("NUM_GPU_DEVICES") ) != NULL ) {
+  if( ( str = getenv ("SLURM_NPROCS") ) != NULL ) {
      use_dev_count = atoi( str );
-     printf( "NUM_GPU_DEVICES %s\n", str );
+     printf( "SLURM_NPROCS %s\n", str );
   } else {
      use_dev_count = dev_count;
   }

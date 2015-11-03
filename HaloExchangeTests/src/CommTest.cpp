@@ -836,7 +836,7 @@ void Validate( double* result, double* expected)
 
 void BindDevice() {
 #ifdef _GCL_GPU_
-  int local_rank, num_local_procs;
+  int local_rank;
   int dev_count, use_dev_count, my_dev_id;
   char *str;
 
@@ -844,10 +844,6 @@ void BindDevice() {
   if( ( str = getenv ( "MV2_COMM_WORLD_LOCAL_RANK") ) != NULL ) {
       local_rank = atoi ( str );
       printf( "MV2_COMM_WORLD_LOCAL_RANK %s\n", str );
-  }
-  if( ( str = getenv ("MPISPAWN_LOCAL_NPROCS") ) != NULL ) {
-      num_local_procs = atoi( str );
-      printf( "MPISPAWN_LOCAL_NPROCS %s\n", str );
   }
   /* NUMBER OF CUDA DEVICES AVAILABLE */
   cudaGetDeviceCount( &dev_count );
@@ -858,6 +854,10 @@ void BindDevice() {
      printf( "SLURM_NPROCS %s\n", str );
   } else {
      use_dev_count = dev_count;
+  }
+  if( ( str = getenv ("SLURM_PROCID") ) != NULL ) {
+     local_rank = atoi( str );
+     printf( "SLURM_PROCID %s\n", str );
   }
   /* ASSIGN DEVICE ID TO PROCESS */
   my_dev_id = local_rank % use_dev_count;
@@ -945,7 +945,6 @@ void init_procgrid()
   // create Cartesian processor grid
   nznumdims = 3;
 
-  int ierror;
   // Instead of creating a cartesian communicator here, we call the fortran subroutine that
   // returns a int cartComm and convert it here, to test the MPI_Comm_f2c feature,
   // and make sure that we get a valid comm when passed from fortran

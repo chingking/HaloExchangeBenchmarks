@@ -14,15 +14,14 @@ EXECUTABLE=$1
 source /etc/bashrc
 module purge
 module load craype-haswell
-module load PrgEnv-cray
 module load cudatoolkit
-module load cray-hdf5/1.8.13
-module load cray-netcdf/4.3.2
 module load gcc
-module load mvapich2_gnu/2.0.1_gnu48
+#module load mvapich2_gnu/2.0.1_gnu48
+module load mvapich2gdr_gnu/2.1
 module list -l
 
-export LD_LIBRARY_PATH=${CRAY_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}:/opt/cray/lib64:/usr/lib64:/opt/local/slurm/default/lib64:/opt/cray/netcdf/4.3.2/CRAY/83/lib
+export LD_LIBRARY_PATH=${CRAY_LD_LIBRARY_PATH}:${LD_LIBRARY_PATH}
+#:/opt/cray/lib64:/usr/lib64:/opt/local/slurm/default/lib64:/opt/cray/netcdf/4.3.2/CRAY/83/lib
 echo $LD_LIBRARY_PATH
 
 env | grep OMP_NUM_THREADS
